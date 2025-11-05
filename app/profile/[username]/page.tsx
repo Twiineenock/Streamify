@@ -8,4 +8,3 @@ export default async function ProfilePage({
   const { username } = await params;
   return <CreatorProfilePage username={username} />;
 }
-

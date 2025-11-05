@@ -47,12 +47,16 @@ export default function DonationButton({ video, onDonate }: DonationButtonProps)
 
   return (
     <>
-      {/* Main Boost Button - Red solid button matching design */}
+      {/* Main Boost Button - Premium styling for great income */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="h-12 w-full rounded-full bg-[#ff0000] px-4 py-2 text-sm font-semibold text-white hover:bg-[#ff3333] transition-colors"
+        className="h-9 md:h-12 w-full rounded-full bg-gradient-to-r from-[#ff6b00] via-[#ff0000] to-[#cc0000] px-3 md:px-4 py-1 md:py-2 text-xs md:text-sm font-bold text-white hover:from-[#ff8b00] hover:via-[#ff3333] hover:to-[#ff0000] transition-all shadow-lg shadow-[#ff0000]/50 hover:shadow-[#ff0000]/70 hover:scale-105 relative overflow-hidden group"
       >
-        Boost
+        <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <span className="relative z-10 flex items-center justify-center gap-1.5">
+          <span className="material-symbols-outlined text-sm md:text-base">stars</span>
+          <span>Boost</span>
+        </span>
       </button>
 
       {/* Boost Modal */}
