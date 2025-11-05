@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Streamify - Video Streaming Platform
+
+A beautiful TikTok-like video streaming application built with Next.js, featuring a powerful donation/boost system for creators.
+
+## Features
+
+- **TikTok-like Vertical Video Feed**: Smooth scrolling vertical video feed with snap scrolling
+- **Powerful Boost/Donation Button**: Extra powerful button with animations to support creators
+- **Creator Profiles**: Beautiful creator profiles with follow functionality
+- **Video Player**: Full-screen video player with play/pause controls
+- **Interactive UI**: Like, comment, and share buttons
+- **Modern Design**: Beautiful gradient backgrounds and smooth animations
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS 4
+- React 19
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies (already done)
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Components
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **VideoFeed**: Main feed component with vertical scrolling
+- **VideoPlayer**: Video player with play/pause functionality
+- **DonationButton**: Powerful boost button with donation amounts
+- **CreatorProfile**: Creator profile display with follow button
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Boost/Donation Feature
 
-## Learn More
+The boost button features:
+- Beautiful gradient animations
+- Multiple preset donation amounts ($5, $10, $25, $50, $100, $500)
+- Custom amount option
+- Visual feedback with animations
+- Success notifications
 
-To learn more about Next.js, take a look at the following resources:
+## Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Currently uses mock video data (videos from Pexels)
+- In production, replace with your own video URLs and API endpoints
+- The donation functionality is currently logging to console - integrate with your payment system
