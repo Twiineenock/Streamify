@@ -128,11 +128,12 @@ export default function Header() {
             <button className="p-1.5 sm:p-2 text-white flex items-center justify-center">
               <span className="material-symbols-outlined text-xl sm:text-2xl">menu</span>
             </button>
-            <Link href="/" className="flex items-center gap-1 sm:gap-2 hover:opacity-80 transition-opacity">
-              <svg className="h-6 w-6 sm:h-8 sm:w-8 text-[#ff0000] flex-shrink-0" fill="currentColor" viewBox="0 0 28 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M27.324 3.125c-.324-.913-.88-1.72-1.668-2.316C23.96 0 14 0 14 0S4.039 0 2.344.809c-.788.596-1.344 1.403-1.668 2.316C0 4.417 0 10 0 10s0 5.583.676 6.875c.324.913.88 1.72 1.668 2.316C4.04 20 14 20 14 20s9.961 0 11.656-.809c.788-.596 1.344-1.403 1.668-2.316C28 15.583 28 10 28 10s0-5.583-.676-6.875ZM11.2 14.286V5.714L18.4 10l-7.2 4.286Z"></path>
-              </svg>
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold tracking-tighter text-white hidden xs:block">Streamify</h1>
+            <Link href="/" className="flex items-center gap-1.5 sm:gap-2 hover:opacity-80 transition-opacity">
+              {/* Streamify Logo - "S" Design */}
+              <div className="h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-[#2ba640] to-[#1a7a2e] flex-shrink-0">
+                <span className="text-white font-bold text-sm sm:text-base">S</span>
+              </div>
+              <h1 className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-white">Streamify</h1>
             </Link>
           </div>
 
