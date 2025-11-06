@@ -1,15 +1,34 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/contexts/AuthContext';
+import AuthModal from './AuthModal';
 
 export default function Header() {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const currentUser = {
-    username: 'you',
-    avatar: 'https://i.pravatar.cc/150?img=68',
-    followers: 5000,
-  };
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+  const { currentUser, logout, loading } = useAuth();
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
+        setIsUserMenuOpen(false);
+      }
+    };
+
+    if (isUserMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isUserMenuOpen]);
 
   const handleSearchFocus = () => {
     setIsSearchExpanded(true);
@@ -23,6 +42,35 @@ export default function Header() {
     e.preventDefault();
     setIsSearchExpanded(false);
     // Handle search here
+  };
+
+  const handleSignIn = () => {
+    setAuthMode('signin');
+    setIsAuthModalOpen(true);
+  };
+
+  const handleSignUp = () => {
+    setAuthMode('signup');
+    setIsAuthModalOpen(true);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsUserMenuOpen(false);
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
+  // Get user avatar - use photoURL if available, otherwise generate from displayName/email
+  const getUserAvatar = () => {
+    if (currentUser?.photoURL) {
+      return currentUser.photoURL;
+    }
+    // Generate avatar from user's display name or email
+    const name = currentUser?.displayName || currentUser?.email || 'user';
+    return `https://i.pravatar.cc/150?img=${name.charCodeAt(0) % 70}`;
   };
 
   return (
@@ -99,16 +147,72 @@ export default function Header() {
 
           {/* Right Section - User Actions */}
           <div className="flex items-center justify-end gap-1 sm:gap-2 md:gap-4">
-            <button className="p-1.5 sm:p-2 text-white flex items-center justify-center">
-              <span className="material-symbols-outlined text-xl sm:text-2xl">videocam</span>
-            </button>
-            <button className="p-1.5 sm:p-2 text-white flex items-center justify-center">
-              <span className="material-symbols-outlined text-xl sm:text-2xl">notifications</span>
-            </button>
-            <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0" style={{ backgroundImage: `url(${currentUser.avatar})` }}></div>
+            {!loading && (
+              <>
+                {currentUser ? (
+                  <>
+                    <button className="p-1.5 sm:p-2 text-white flex items-center justify-center">
+                      <span className="material-symbols-outlined text-xl sm:text-2xl">videocam</span>
+                    </button>
+                    <button className="p-1.5 sm:p-2 text-white flex items-center justify-center">
+                      <span className="material-symbols-outlined text-xl sm:text-2xl">notifications</span>
+                    </button>
+                    <div className="relative" ref={userMenuRef}>
+                      <button
+                        onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 border-2 border-transparent hover:border-[#ff0000] transition-colors"
+                        style={{ backgroundImage: `url(${getUserAvatar()})` }}
+                      ></button>
+                      {isUserMenuOpen && (
+                        <div className="absolute right-0 top-12 w-48 bg-[#222222] rounded-xl border border-[#333333] shadow-2xl overflow-hidden z-50">
+                          <div className="p-3 border-b border-[#333333]">
+                            <p className="text-white font-semibold text-sm truncate">
+                              {currentUser.displayName || 'User'}
+                            </p>
+                            <p className="text-[#aaaaaa] text-xs truncate">
+                              {currentUser.email}
+                            </p>
+                          </div>
+                          <button
+                            onClick={handleLogout}
+                            className="w-full px-4 py-3 text-left text-white hover:bg-[#333333] transition-colors flex items-center gap-2"
+                          >
+                            <span className="material-symbols-outlined text-lg">logout</span>
+                            <span>Sign Out</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={handleSignIn}
+                      className="h-9 px-4 rounded-full bg-[#222222] text-white text-sm font-medium hover:bg-[#333333] transition-colors hidden sm:block"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={handleSignUp}
+                      className="h-9 px-4 rounded-full bg-[#ff0000] text-white text-sm font-bold hover:bg-[#ff3333] transition-colors"
+                    >
+                      Sign Up
+                    </button>
+                  </>
+                )}
+              </>
+            )}
           </div>
         </>
       )}
+      
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        mode={authMode}
+        onModeChange={setAuthMode}
+      />
     </header>
   );
 }
