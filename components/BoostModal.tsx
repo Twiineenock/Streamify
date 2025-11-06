@@ -146,8 +146,8 @@ export default function BoostModal({ isOpen, onClose, creator, onBoost }: BoostM
                   onClick={() => handleAmountSelect(amount)}
                   className={`h-14 rounded-xl border-2 transition-all font-semibold ${
                     selectedAmount === amount && !showCustomInput
-                      ? 'bg-[#ff0000] border-[#ff0000] text-white scale-105'
-                      : 'bg-[#222222] border-[#222222] text-white hover:border-[#ff0000]/50'
+                      ? 'bg-[#2ba640] border-[#2ba640] text-white scale-105'
+                      : 'bg-[#222222] border-[#222222] text-white hover:border-[#2ba640]/50'
                   }`}
                 >
                   ${amount}
@@ -158,8 +158,8 @@ export default function BoostModal({ isOpen, onClose, creator, onBoost }: BoostM
                 onClick={handleCustomAmount}
                 className={`h-14 rounded-xl border-2 transition-all font-semibold ${
                   showCustomInput
-                    ? 'bg-[#ff0000] border-[#ff0000] text-white scale-105'
-                    : 'bg-[#222222] border-[#222222] text-white hover:border-[#ff0000]/50'
+                    ? 'bg-[#2ba640] border-[#2ba640] text-white scale-105'
+                    : 'bg-[#222222] border-[#222222] text-white hover:border-[#2ba640]/50'
                 }`}
               >
                 Custom
@@ -291,7 +291,7 @@ export default function BoostModal({ isOpen, onClose, creator, onBoost }: BoostM
           <button
             type="submit"
             disabled={isProcessing || finalAmount <= 0}
-            className="w-full h-14 rounded-xl bg-[#ff0000] text-white font-bold text-lg hover:bg-[#ff3333] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full h-14 rounded-xl bg-[#2ba640] text-white font-bold text-lg hover:bg-[#2ba640]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isProcessing ? (
               <>

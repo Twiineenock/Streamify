@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import VideoPlayer from './VideoPlayer';
-import DonationButton from './DonationButton';
 import BoostModal from './BoostModal';
 import Header from './Header';
 
@@ -131,9 +130,9 @@ export default function VideoFeed({ videos }: VideoFeedProps) {
                           e.stopPropagation();
                           setBoostModalState({ isOpen: true, video });
                         }}
-                        className="hidden md:flex h-7 sm:h-8 px-3 sm:px-4 rounded-full bg-gradient-to-r from-[#ff6b00] via-[#ff0000] to-[#cc0000] text-white text-xs sm:text-sm font-bold hover:from-[#ff8b00] hover:via-[#ff3333] hover:to-[#ff0000] transition-all shadow-lg shadow-[#ff0000]/50 hover:shadow-[#ff0000]/70 flex-shrink-0 items-center justify-center gap-1.5"
+                        className="hidden md:flex h-7 sm:h-8 px-3 sm:px-4 rounded-full bg-[#2ba640] text-white text-xs sm:text-sm font-bold hover:bg-[#2ba640]/90 transition-all shadow-lg shadow-[#2ba640]/50 hover:shadow-[#2ba640]/70 flex-shrink-0 items-center justify-center gap-1.5"
                       >
-                        <span className="material-symbols-outlined text-sm sm:text-base">stars</span>
+                        <span className="material-symbols-outlined text-sm sm:text-base">attach_money</span>
                         <span>Boost</span>
                       </button>
                     </div>
@@ -180,11 +179,10 @@ export default function VideoFeed({ videos }: VideoFeedProps) {
                     onClick={() => setBoostModalState({ isOpen: true, video })}
                     className="flex flex-col items-center gap-0.5 relative group"
                   >
-                    <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-gradient-to-br from-[#ff6b00] via-[#ff0000] to-[#cc0000] flex items-center justify-center hover:from-[#ff8b00] hover:via-[#ff3333] hover:to-[#ff0000] transition-all shadow-lg shadow-[#ff0000]/50 hover:shadow-[#ff0000]/70 hover:scale-110 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/20 to-transparent"></div>
-                      <span className="material-symbols-outlined text-base sm:text-lg text-white relative z-10">stars</span>
+                    <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-[#2ba640] flex items-center justify-center hover:bg-[#2ba640]/90 transition-all shadow-lg shadow-[#2ba640]/50 hover:shadow-[#2ba640]/70 hover:scale-110 relative overflow-hidden">
+                      <span className="material-symbols-outlined text-base sm:text-lg text-white relative z-10">attach_money</span>
                     </div>
-                    <span className="text-[9px] sm:text-[10px] font-bold text-white bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">Boost</span>
+                    <span className="text-[9px] sm:text-[10px] font-bold text-[#2ba640]">Boost</span>
                   </button>
                   </div>
                 </div>

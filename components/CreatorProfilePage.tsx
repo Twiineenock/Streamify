@@ -175,9 +175,12 @@ export default function CreatorProfilePage({ username }: CreatorProfilePageProps
                 <div className="flex w-full gap-3 @[640px]:w-auto @[640px]:justify-end">
                   <button 
                     onClick={() => setIsBoostModalOpen(true)}
-                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#ff0000] text-black text-sm font-medium leading-normal flex-1 @[640px]:flex-none hover:bg-[#ff0000]/90 transition-colors"
+                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[#2ba640] text-white text-sm font-bold leading-normal flex-1 @[640px]:flex-none hover:bg-[#2ba640]/90 transition-all shadow-lg shadow-[#2ba640]/50 hover:shadow-[#2ba640]/70"
                   >
-                    <span className="truncate font-bold">Boost</span>
+                    <span className="truncate font-bold flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-base">attach_money</span>
+                      <span>Boost</span>
+                    </span>
                   </button>
                   <button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-white text-black text-sm font-medium leading-normal flex-1 @[640px]:flex-none hover:bg-gray-200 transition-colors">
                     <span className="truncate">Subscribe</span>

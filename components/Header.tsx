@@ -63,14 +63,31 @@ export default function Header() {
     }
   };
 
-  // Get user avatar - use photoURL if available, otherwise generate from displayName/email
-  const getUserAvatar = () => {
-    if (currentUser?.photoURL) {
-      return currentUser.photoURL;
-    }
-    // Generate avatar from user's display name or email
-    const name = currentUser?.displayName || currentUser?.email || 'user';
-    return `https://i.pravatar.cc/150?img=${name.charCodeAt(0) % 70}`;
+  // Get user's first letter and background color
+  const getUserInitial = () => {
+    const name = currentUser?.displayName || currentUser?.email || 'User';
+    return name.charAt(0).toUpperCase();
+  };
+
+  // Generate a consistent background color based on the first letter
+  const getUserAvatarColor = () => {
+    const name = currentUser?.displayName || currentUser?.email || 'User';
+    const letter = name.charAt(0).toUpperCase();
+    // Generate a color based on the letter (using a simple hash)
+    const colors = [
+      '#2ba640', // Green
+      '#ff0000', // Red
+      '#ff6b00', // Orange
+      '#0066ff', // Blue
+      '#9b59b6', // Purple
+      '#e74c3c', // Red variant
+      '#3498db', // Blue variant
+      '#1abc9c', // Teal
+      '#f39c12', // Orange variant
+      '#e67e22', // Dark orange
+    ];
+    const index = letter.charCodeAt(0) % colors.length;
+    return colors[index];
   };
 
   return (
@@ -160,9 +177,11 @@ export default function Header() {
                     <div className="relative" ref={userMenuRef}>
                       <button
                         onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 border-2 border-transparent hover:border-[#ff0000] transition-colors"
-                        style={{ backgroundImage: `url(${getUserAvatar()})` }}
-                      ></button>
+                        className="h-8 w-8 sm:h-10 sm:w-10 rounded-full flex-shrink-0 border-2 border-transparent hover:border-[#ff0000] transition-colors flex items-center justify-center text-white font-bold text-sm sm:text-base"
+                        style={{ backgroundColor: getUserAvatarColor() }}
+                      >
+                        {getUserInitial()}
+                      </button>
                       {isUserMenuOpen && (
                         <div className="absolute right-0 top-12 w-48 bg-[#222222] rounded-xl border border-[#333333] shadow-2xl overflow-hidden z-50">
                           <div className="p-3 border-b border-[#333333]">
